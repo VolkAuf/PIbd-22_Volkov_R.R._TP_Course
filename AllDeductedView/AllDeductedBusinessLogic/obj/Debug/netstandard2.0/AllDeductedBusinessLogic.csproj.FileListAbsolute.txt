@@ -1,0 +1,4 @@
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.0\AllDeductedBusinessLogic.csprojAssemblyReference.cache
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.0\AllDeductedBusinessLogic.AssemblyInfoInputs.cache
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.0\AllDeductedBusinessLogic.AssemblyInfo.cs
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.0\AllDeductedBusinessLogic.csproj.CoreCompileInputs.cache
