@@ -8,10 +8,10 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="DockPanel" x:Key="MainMenu">
-            <Setter Property="Background" Value="{StaticResource General_backgroundBrush}"></Setter>
+            <Setter Property="Background" Value="{StaticResource General_foregroundBrush}"></Setter>
         </Style>
         <Style TargetType="Button" x:Key="MainMenu_button">
-            <Setter Property="Background" Value="{StaticResource General_backgroundBrush}"></Setter>
+            <Setter Property="Background" Value="{StaticResource mainBlue}"></Setter>
             <Setter Property="Foreground" Value="{StaticResource General_foregroundBrush}"></Setter>
             <Setter Property="FontFamily" Value="{StaticResource General_fontFamily}"></Setter>
             <Setter Property="FontWeight" Value="Bold"></Setter>
@@ -31,7 +31,7 @@
                         <Storyboard>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="White" Duration="0:0:0.25">
                             </ColorAnimation>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.25">
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="#FF005F90" Duration="0:0:0.25">
                             </ColorAnimation>
                         </Storyboard>
                     </BeginStoryboard>
@@ -39,7 +39,7 @@
                 <EventTrigger RoutedEvent="MouseLeave">
                     <BeginStoryboard>
                         <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Black" Duration="0:0:0.25">
+                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="#FF005F90" Duration="0:0:0.25">
                             </ColorAnimation>
                             <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.25">
                             </ColorAnimation>
@@ -87,8 +87,8 @@
         <!--Подвал-->
         
         <!--Графика-->
-        <Canvas HorizontalAlignment="Center" Width="450" Height="250" VerticalAlignment="Center">
-            <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\Kursovoi\Course\Images\logo.bmp" Height="250" Width="450" />
+        <Canvas HorizontalAlignment="Center" Width="650" Height="300" VerticalAlignment="Center">
+            <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\Images\logoMain.bmp" Height="300" Width="650" />
         </Canvas>
     </DockPanel>
 </Window>

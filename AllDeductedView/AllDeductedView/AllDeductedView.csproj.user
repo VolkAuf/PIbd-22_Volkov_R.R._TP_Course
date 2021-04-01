@@ -16,6 +16,9 @@
     <Compile Update="StudyingStatusesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="StudyingStatusWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -28,6 +31,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="StudyingStatusesWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="StudyingStatusWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

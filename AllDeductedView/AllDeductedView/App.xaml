@@ -6,9 +6,11 @@
     <Application.Resources>
         <SolidColorBrush x:Key="General_backgroundBrush" Color="Black"></SolidColorBrush>
         <SolidColorBrush x:Key="General_foregroundBrush" Color="White"></SolidColorBrush>
+        <SolidColorBrush x:Key="mainBlue" Color="#FF005F90"/>
+
         <FontFamily x:Key="General_fontFamily">Times New Roman</FontFamily>
         <Style x:Key="General_button" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource General_backgroundBrush}"></Setter>
+            <Setter Property="Background" Value="{StaticResource mainBlue}"></Setter>
             <Setter Property="Foreground" Value="{StaticResource General_foregroundBrush}"></Setter>
             <Setter Property="FontFamily" Value="{StaticResource General_fontFamily}"></Setter>
             <Setter Property="Height" Value="25"></Setter>

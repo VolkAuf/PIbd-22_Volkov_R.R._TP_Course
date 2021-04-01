@@ -50,3 +50,5 @@ C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDe
 C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\obj\Debug\netcoreapp3.1\OrderWindow.baml
 C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\obj\Debug\netcoreapp3.1\StudentWindow.baml
 C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\obj\Debug\netcoreapp3.1\StudyingStatusesWindow.baml
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\obj\Debug\netcoreapp3.1\StudyingStatusWindow.g.cs
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\obj\Debug\netcoreapp3.1\StudyingStatusWindow.baml

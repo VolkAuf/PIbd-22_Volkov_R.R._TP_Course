@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\WorkTable.png" />
+    <None Remove="Images\logo.bmp" />
+    <None Remove="Images\LogoMain.bmp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\WorkTable.png" />
+    <Resource Include="Images\logo.bmp" />
+    <Resource Include="Images\LogoMain.bmp" />
   </ItemGroup>
 
 </Project>
