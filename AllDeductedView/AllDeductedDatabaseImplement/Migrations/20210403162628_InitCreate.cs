@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AllDeductedDatabaseImplement.Migrations
 {
-    public partial class InirCreate : Migration
+    public partial class InitCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -165,7 +165,7 @@ namespace AllDeductedDatabaseImplement.Migrations
                     first_name = table.Column<string>(type: "text", nullable: false),
                     last_name = table.Column<string>(type: "text", nullable: false),
                     patronymic = table.Column<string>(type: "text", nullable: false),
-                    thread_id = table.Column<int>(type: "integer", nullable: false),
+                    thread_id = table.Column<int>(type: "integer", nullable: true),
                     provider_id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -182,7 +182,7 @@ namespace AllDeductedDatabaseImplement.Migrations
                         column: x => x.thread_id,
                         principalTable: "thread",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

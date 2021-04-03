@@ -88,7 +88,7 @@
         
         <!--Графика-->
         <Canvas HorizontalAlignment="Center" Width="650" Height="300" VerticalAlignment="Center">
-            <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\Images\logoMain.bmp" Height="300" Width="650" />
+            <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\Images\logo.bmp" Height="300" Width="650" />
         </Canvas>
     </DockPanel>
 </Window>

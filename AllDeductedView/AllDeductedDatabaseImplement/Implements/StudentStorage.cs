@@ -1,8 +1,10 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.Interfaces;
 using AllDeductedBusinessLogic.ViewModels;
+using AllDeductedDatabaseImplement.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AllDeductedDatabaseImplement.Implements
@@ -11,32 +13,110 @@ namespace AllDeductedDatabaseImplement.Implements
     {
         public void Delete(StudentBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                Student element = context.Students.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element != null)
+                {
+                    context.Students.Remove(element);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception("Элемент не найден");
+                }
+            }
         }
 
         public StudentViewModel GetElement(StudentBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                return null;
+            }
+            using (var context = new Context())
+            {
+                Student student = context.Students
+                .FirstOrDefault(rec => rec.Id == model.Id);
+                return student != null ?
+                new StudentViewModel
+                {
+                    Id = student.Id,
+                    FirstName = student.FirstName,
+                    LastName = student.LastName,
+                    Patronymic = student.Patronymic
+                } :
+                null;
+            }
         }
 
         public List<StudentViewModel> GetFilteredList(StudentBindingModel model)
         {
-            throw new NotImplementedException();
+            if (model == null)
+            {
+                return null;
+            }
+            using (var context = new Context())
+            {
+                return context.Students
+                .Select(rec => new StudentViewModel
+                {
+                    Id = rec.Id,
+                    FirstName = rec.FirstName,
+                    LastName = rec.LastName,
+                    Patronymic = rec.Patronymic
+                })
+                .ToList();
+            }
         }
 
         public List<StudentViewModel> GetFullList()
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                return context.Students
+                .Select(rec => new StudentViewModel
+                {
+                    Id = rec.Id,
+                    FirstName = rec.FirstName,
+                    LastName = rec.LastName,
+                    Patronymic = rec.Patronymic
+                })
+                .ToList();
+            }
         }
 
         public void Insert(StudentBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                context.Add(CreateModel(model, new Student()));
+                context.SaveChanges();
+            }
         }
 
         public void Update(StudentBindingModel model)
         {
-            throw new NotImplementedException();
+            using (var context = new Context())
+            {
+                Student element = context.Students.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
+                {
+                    throw new Exception("Элемент не найден");
+                }
+                CreateModel(model, element);
+                context.SaveChanges();
+            }
+        }
+
+        private Student CreateModel(StudentBindingModel model, Student student)
+        {
+            student.FirstName = model.FirstName;
+            student.LastName = model.LastName;
+            student.Patronymic = model.Patronymic;
+            student.ProviderId = model.ProviderId;
+
+            return student;
         }
     }
 }

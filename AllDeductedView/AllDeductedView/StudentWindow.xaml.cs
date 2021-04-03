@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AllDeductedBusinessLogic.BindingModels;
+using AllDeductedBusinessLogic.BusinessLogics;
+using AllDeductedBusinessLogic.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -9,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Unity;
 
 namespace AllDeductedView
 {
@@ -17,9 +21,79 @@ namespace AllDeductedView
     /// </summary>
     public partial class StudentWindow : Window
     {
-        public StudentWindow()
+        [Dependency]
+        public IUnityContainer Container { get; set; }
+
+        public int Id
+        {
+            set { id = value; }
+        }
+
+        private int? id;
+
+        private readonly StudentLogic logicS;
+        public StudentWindow(StudentLogic logicS)
         {
             InitializeComponent();
+            
+            this.logicS = logicS;
+        }
+        private void StudentWindow_Load(object sender, RoutedEventArgs e)
+        {
+            if (id.HasValue)
+            {
+                StudentViewModel student = logicS.Read(new StudentBindingModel
+                {
+                    Id = id
+                })?[0];
+
+                textBoxFirstName.Text = student.FirstName;
+                textBoxLastName.Text = student.LastName;
+                textBoxPatronymic.Text = student.Patronymic;
+            }
+        }
+
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxFirstName.Text))
+            {
+                MessageBox.Show("Заполните поле FirstName", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(textBoxLastName.Text))
+            {
+                MessageBox.Show("Заполните поле LastName", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (string.IsNullOrEmpty(textBoxPatronymic.Text))
+            {
+                MessageBox.Show("Заполните поле Patronymic", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                logicS.CreateOrUpdate(new StudentBindingModel
+                {
+                    Id = id,
+                    FirstName = textBoxFirstName.Text.ToString(),
+                    LastName = textBoxLastName.Text.ToString(),
+                    Patronymic = textBoxPatronymic.Text.ToString(),
+                    ProviderId = App.SelectProvider.Id
+                });
+                MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
+                DialogResult = true;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        private void ButtonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            Close();
         }
     }
 }

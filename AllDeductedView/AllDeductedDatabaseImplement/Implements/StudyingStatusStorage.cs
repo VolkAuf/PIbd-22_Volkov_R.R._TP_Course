@@ -60,7 +60,6 @@ namespace AllDeductedDatabaseImplement.Implements
             using (var context = new Context())
             {
                 return context.StudyingStatuses
-                .ToList()
                 .Select(rec => new StudyingStatusViewModel
                 {
                     Id = rec.Id,
@@ -94,16 +93,7 @@ namespace AllDeductedDatabaseImplement.Implements
         {
             using (var context = new Context())
             {
-                StudyingStatus studyingStatus = new StudyingStatus
-                {
-                    StudentId = model.StudentId,
-                    StudyingForm = model.StudyingForm,
-                    StudyingBase = model.StudyingBase,
-                    Course = model.Course
-                };
-                context.StudyingStatuses.Add(studyingStatus);
-                context.SaveChanges();
-                CreateModel(model, studyingStatus);
+                context.Add(CreateModel(model, new StudyingStatus(), context));
                 context.SaveChanges();
             }
         }
@@ -117,24 +107,19 @@ namespace AllDeductedDatabaseImplement.Implements
                 {
                     throw new Exception("Элемент не найден");
                 }
-                element.StudentId = model.StudentId;
-                element.StudyingForm = model.StudyingForm;
-                element.StudyingBase = model.StudyingBase;
-                element.Course = model.Course;
-                CreateModel(model, element);
+                
+                CreateModel(model, element, context);
                 context.SaveChanges();
             }
         }
 
-        private StudyingStatus CreateModel(StudyingStatusBindingModel model, StudyingStatus studyingStatus)
+        private StudyingStatus CreateModel(StudyingStatusBindingModel model, StudyingStatus studyingStatus, Context context)
         {
             if (model == null)
             {
                 return null;
             }
 
-            using (var context = new Context())
-            {
                 Student element = context.Students.FirstOrDefault(rec => rec.Id == model.StudentId);
                 if (element != null)
                 {
@@ -142,15 +127,18 @@ namespace AllDeductedDatabaseImplement.Implements
                     {
                         element.StudyingStatus = new StudyingStatus();
                     }
+                    studyingStatus.StudyingBase = model.StudyingBase;
+                    studyingStatus.StudyingForm = model.StudyingForm;
+                    studyingStatus.ProviderId = model.ProviderId;
+                    studyingStatus.Course = model.Course;
+                    studyingStatus.StudentId = model.StudentId;
                     element.StudyingStatus = studyingStatus;
                     context.Students.Update(element);
-                    context.SaveChanges();
                 }
                 else
                 {
                     throw new Exception("Элемент не найден");
                 }
-            }
             return studyingStatus;
         }
     }

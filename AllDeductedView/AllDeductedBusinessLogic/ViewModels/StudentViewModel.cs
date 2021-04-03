@@ -7,6 +7,7 @@ namespace AllDeductedBusinessLogic.ViewModels
 {
     public class StudentViewModel
     {
+        [DisplayName("Зачётная книга")]
         public int Id { get; set; }
         [DisplayName("Имя")]
         public string FirstName { get; set; }

@@ -1,6 +1,7 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.Enums;
+using AllDeductedBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,44 +25,53 @@ namespace AllDeductedView
         [Dependency]
         public IUnityContainer Container { get; set; }
 
-        public int StudyingStatusId
+        public int Id
         {
-            set { }
+            set { id = value; }
         }
-        public int StudentId
-        {
-            set { comboBoxStudentId.SelectedValue = value; }
-        }
-
-        public int Course
-        {
-            set
-            {
-                textBoxCourse.Text = value.ToString();
-            }
-        }
+       
+        private int? id;
+        
 
         private readonly StudyingStatusLogic logicSS;
+        private readonly StudentLogic logicS;
         public StudyingStatusWindow(StudyingStatusLogic logicSS, StudentLogic logicS)
         {
             InitializeComponent();
-            /*List<StudentViewModel> list = logicS.Read(null);
+            this.logicSS = logicSS;
+            this.logicS = logicS;
+        }
+
+        private void StudyingStatusesWindow_Load(object sender, RoutedEventArgs e)
+        {
+            List<StudentViewModel> list = logicS.Read(null);
             if (list != null)
             {
                 comboBoxStudentId.ItemsSource = list;
                 comboBoxStudentId.SelectedItem = null;
-            }*/
+            }
             comboBoxStudyingBase.Items.Clear();
-            foreach (string position in Enum.GetNames(typeof(StudyingBase)))
+            foreach (string _base in Enum.GetNames(typeof(StudyingBase)))
             {
-                comboBoxStudyingBase.Items.Add(position);
+                comboBoxStudyingBase.Items.Add(_base);
             }
             comboBoxStudyingForm.Items.Clear();
-            foreach (string position in Enum.GetNames(typeof(StudyingForm)))
+            foreach (string form in Enum.GetNames(typeof(StudyingForm)))
             {
-                comboBoxStudyingForm.Items.Add(position);
+                comboBoxStudyingForm.Items.Add(form);
             }
-            this.logicSS = logicSS;
+            if (id.HasValue)
+            {
+                StudyingStatusViewModel status = logicSS.Read(new StudyingStatusBindingModel
+                {
+                    Id = id
+                })?[0];
+
+                comboBoxStudentId.SelectedValue = status.StudentId;
+                comboBoxStudyingBase.SelectedItem = status.StudyingBase.ToString();
+                comboBoxStudyingForm.SelectedItem = status.StudyingForm.ToString();
+                textBoxCourse.Text = status.Course.ToString();
+            }
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -90,10 +100,12 @@ namespace AllDeductedView
             {
                 logicSS.CreateOrUpdate(new StudyingStatusBindingModel
                 {
+                    Id = id,
                     StudentId = (int)comboBoxStudentId.SelectedValue,
                     StudyingForm = (StudyingForm)Enum.Parse(typeof(StudyingForm), comboBoxStudyingForm.SelectedValue.ToString()),
                     StudyingBase = (StudyingBase)Enum.Parse(typeof(StudyingBase), comboBoxStudyingBase.SelectedValue.ToString()),
                     Course = Convert.ToInt32(textBoxCourse.Text),
+                    ProviderId = App.SelectProvider.Id
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButton.OK, MessageBoxImage.Information);
                 DialogResult = true;

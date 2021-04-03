@@ -30,8 +30,8 @@ namespace AllDeductedView
 
         private void ButtonStudent_Click(object sender, RoutedEventArgs e)
         {
-            var window = Container.Resolve<StudentWindow>();
-            //window.ShowDialog();
+            var window = Container.Resolve<StudentsWindow>();
+            window.ShowDialog();
         }
 
         private void ButtonWork_Click(object sender, RoutedEventArgs e)

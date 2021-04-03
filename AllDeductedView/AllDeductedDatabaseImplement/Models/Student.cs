@@ -21,7 +21,7 @@ namespace AllDeductedDatabaseImplement.Models
         [Column("patronymic")]
         public string Patronymic { get; set; }
         [Column("thread_id")]
-        public int ThreadId { get; set; }
+        public int? ThreadId { get; set; }
         public virtual Thread Thread { get; set; }
         [Column("provider_id")]
         public int ProviderId { get; set; }

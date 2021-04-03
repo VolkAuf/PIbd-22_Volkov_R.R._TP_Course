@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllDeductedDatabaseImplement.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210401101600_InirCreate")]
-    partial class InirCreate
+    [Migration("20210403162628_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -212,7 +212,7 @@ namespace AllDeductedDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("provider_id");
 
-                    b.Property<int>("ThreadId")
+                    b.Property<int?>("ThreadId")
                         .HasColumnType("integer")
                         .HasColumnName("thread_id");
 
@@ -448,9 +448,7 @@ namespace AllDeductedDatabaseImplement.Migrations
 
                     b.HasOne("AllDeductedDatabaseImplement.Models.Thread", "Thread")
                         .WithMany("Students")
-                        .HasForeignKey("ThreadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ThreadId");
 
                     b.Navigation("Provider");
 

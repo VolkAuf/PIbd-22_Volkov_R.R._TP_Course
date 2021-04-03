@@ -1,4 +1,6 @@
-﻿using AllDeductedBusinessLogic.BusinessLogics;
+﻿using AllDeductedBusinessLogic.BindingModels;
+using AllDeductedBusinessLogic.BusinessLogics;
+using AllDeductedBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -60,38 +62,37 @@ namespace AllDeductedView
 
         private void ButtonUpd_Click(object sender, RoutedEventArgs e)
         {
-            /*if (dataGridStudyingStatuses.SelectedItems.Count == 1)
+            if (dataGridStudyingStatuses.SelectedItems.Count == 1)
             {
                 var form = Container.Resolve<StudyingStatusWindow>();
-                int id = ((StudyingStatusViewModel)dataGridStudyingStatuses.SelectedItems[0]).WorkId;
+                int id = ((StudyingStatusViewModel)dataGridStudyingStatuses.SelectedItems[0]).Id;
                 form.Id = id;
-                form.Duration = ((StudyingStatusViewModel)dataGridStudyingStatuses.SelectedItems[0]).Duration;
                 if (form.ShowDialog() == true)
                 {
                     LoadData();
                 }
-            }*/
+            }
         }
 
         private void ButtonDel_Click(object sender, RoutedEventArgs e)
         {
-            /*if (dataGridStudyingStatuses.SelectedItems.Count == 1)
+            if (dataGridStudyingStatuses.SelectedItems.Count == 1)
             {
                 MessageBoxResult result = (MessageBoxResult)MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
                 {
-                    int id = ((StudyingStatusViewModel)dataGridStudyingStatuses.SelectedItems[0]).WorkId;
+                    int id = ((StudyingStatusViewModel)dataGridStudyingStatuses.SelectedItems[0]).Id;
                     try
                     {
-                        logic.Delete(new StudyingStatusBindingModel { WorkId = id });
+                        logic.Delete(new StudyingStatusBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     LoadData();
                 }
-            }*/
+            }
         }
         private void ButtonRef_Click(object sender, RoutedEventArgs e)
         {
