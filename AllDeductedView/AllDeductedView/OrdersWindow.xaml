@@ -1,0 +1,32 @@
+﻿<Window x:Class="AllDeductedView.OrdersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AllDeductedView"
+        Loaded="OrdersWindow_Loaded"
+        mc:Ignorable="d"
+        Title="OrdersWindow" Height="450" Width="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid Grid.Column="0"/>
+        <DataGrid x:Name="dataGridOrders" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="false">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер приказа" Binding="{Binding Id}" Width="0.2*"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding DateCreate}" Width="0.3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" VerticalAlignment="Top">
+            <Button Content="Добавить" Style="{StaticResource General_button}" Margin="20" Click="ButtonAdd_Click"/>
+            <Button Content="Изменить" Style="{StaticResource General_button}" Margin="20" Click="ButtonUpd_Click"/>
+            <Button Content="Удалить" Style="{StaticResource General_button}" Margin="20" Click="ButtonDel_Click"/>
+            <Button Content="Обновить" Style="{StaticResource General_button}" Margin="20" Click="ButtonRef_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

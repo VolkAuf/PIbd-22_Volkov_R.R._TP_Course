@@ -12,7 +12,7 @@
             <Label Content="Почта" FontSize="24" Margin="10,5" FontFamily="{StaticResource General_fontFamily}" ></Label>
             <TextBox x:Name="textBoxEmail" Height="25" Margin="10,5" FontSize="24" FontFamily="{StaticResource General_fontFamily}"></TextBox>
             <Label Content="Пароль" FontSize="24" Margin="10,5" FontFamily="{StaticResource General_fontFamily}"></Label>
-            <PasswordBox x:Name="passwordBox" Height="25" Margin="10,5" FontSize="24"></PasswordBox>
+            <PasswordBox x:Name="passwordBox" Height="25" Margin="10,5" FontSize="20"></PasswordBox>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>

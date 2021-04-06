@@ -26,19 +26,24 @@ namespace AllDeductedBusinessLogic.BusinessLogics
             }
             return _orderStorage.GetFilteredList(model);
         }
-        public void CreateOrder(OrderBindingModel model)
+        public void CreateOrUpdateOrder(OrderBindingModel model)
         {
-            _orderStorage.Insert(new OrderBindingModel
+            if (model.Id.HasValue)
             {
-                Students = model.Students,
-                ProviderId = model.ProviderId,
-                DateCreate = DateTime.Now
-            });
+                _orderStorage.Update(model);
+            }
+            else
+            {
+
+                _orderStorage.Insert(new OrderBindingModel
+                {
+                    Students = model.Students,
+                    ProviderId = model.ProviderId,
+                    DateCreate = DateTime.Now
+                });
+            }
         }
-        public void UpdateOrder(OrderBindingModel model)
-        {
-            _orderStorage.Update(model);
-        }
+        
         public void Delete(OrderBindingModel model)
         {
             OrderViewModel element = _orderStorage.GetElement(new OrderBindingModel { Id = model.Id });

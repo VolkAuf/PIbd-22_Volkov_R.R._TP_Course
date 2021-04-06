@@ -65,8 +65,8 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Студенты" Style="{StaticResource MainMenu_button}" Click="ButtonStudent_Click"/>
-            <Button Grid.Column="1" Content="Приказы" Style="{StaticResource MainMenu_button}" Click="ButtonWork_Click"/>
-            <Button Grid.Column="2" Style="{StaticResource MainMenu_button}" Click="ButtonWorkDutations_Click">
+            <Button Grid.Column="1" Content="Приказы" Style="{StaticResource MainMenu_button}" Click="ButtonOrder_Click"/>
+            <Button Grid.Column="2" Style="{StaticResource MainMenu_button}" Click="ButtonStatus_Click">
                 <Button.Content>
                     <TextBlock Text="Статусы студентов" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                 </Button.Content>

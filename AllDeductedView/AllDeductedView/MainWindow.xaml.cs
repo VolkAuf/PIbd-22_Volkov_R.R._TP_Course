@@ -34,13 +34,13 @@ namespace AllDeductedView
             window.ShowDialog();
         }
 
-        private void ButtonWork_Click(object sender, RoutedEventArgs e)
+        private void ButtonOrder_Click(object sender, RoutedEventArgs e)
         {
-            var window = Container.Resolve<OrderWindow>();
-            //window.ShowDialog();
+            var window = Container.Resolve<OrdersWindow>();
+            window.ShowDialog();
         }
 
-        private void ButtonWorkDutations_Click(object sender, RoutedEventArgs e)
+        private void ButtonStatus_Click(object sender, RoutedEventArgs e)
         {
             var window = Container.Resolve<StudyingStatusesWindow>();
             window.ShowDialog();
@@ -48,7 +48,8 @@ namespace AllDeductedView
 
         private void ButtonLink_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = Container.Resolve<OrderGroupWindow>();
+            window.ShowDialog();
         }
         private void ButtonReportDiscipline_Click(object sender, RoutedEventArgs e)
         {
@@ -57,7 +58,8 @@ namespace AllDeductedView
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = false;
+            Close();
         }
     }
 }

@@ -12,8 +12,8 @@ namespace AllDeductedBusinessLogic.ViewModels
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
 
-        public List<int> Students { get; set; }
+        public Dictionary<int,string> Students { get; set; }
 
-        public List<int> Groups { get; set; }
+        public Dictionary<int, string> Groups { get; set; }
     }
 }

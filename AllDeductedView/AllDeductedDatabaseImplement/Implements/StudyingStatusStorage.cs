@@ -15,11 +15,17 @@ namespace AllDeductedDatabaseImplement.Implements
         {
             using (var context = new Context())
             {
-                StudyingStatus element = context.StudyingStatuses.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element != null)
+                StudyingStatus status = context.StudyingStatuses.FirstOrDefault(rec => rec.Id == model.Id);
+                if (status != null)
                 {
-                    context.StudyingStatuses.Remove(element);
+                    context.StudyingStatuses.Remove(status);
                     context.SaveChanges();
+                }
+                Student student = context.Students.FirstOrDefault(rec => rec.Id == model.StudentId);
+                if (student != null)
+                {
+                    student.StudyingStatus = null;
+                    context.Students.Update(student);
                 }
                 else
                 {

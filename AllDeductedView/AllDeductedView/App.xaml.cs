@@ -29,10 +29,12 @@ namespace AllDeductedView
             currentContainer.RegisterType<IStudentStorage, StudentStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IStudyingStatusStorage, StudyingStatusStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IProviderStorage, ProviderStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IGroupStorage, GroupStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<StudentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<StudyingStatusLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ProviderLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<GroupLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

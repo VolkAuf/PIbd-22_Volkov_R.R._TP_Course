@@ -10,8 +10,10 @@ namespace AllDeductedDatabaseImplement.Models
     {
         [Column("id")]
         public int Id { get; set; }
+
         [Column("order_id")]
         public int OrderId { get; set; }
+
         [Column("student_id")]
         public int StudentId { get; set; }
 

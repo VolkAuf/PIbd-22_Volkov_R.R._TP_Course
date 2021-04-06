@@ -6,3 +6,4 @@ C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDe
 C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\bin\Debug\netstandard2.1\AllDeductedBusinessLogic.pdb
 C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.1\AllDeductedBusinessLogic.dll
 C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.1\AllDeductedBusinessLogic.pdb
+C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedBusinessLogic\obj\Debug\netstandard2.1\AllDeductedBusinessLogic.csprojAssemblyReference.cache
