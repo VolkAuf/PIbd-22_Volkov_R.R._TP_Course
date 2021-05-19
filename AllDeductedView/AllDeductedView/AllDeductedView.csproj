@@ -9,6 +9,7 @@
   <ItemGroup>
     <None Remove="Images\logo.bmp" />
     <None Remove="Images\LogoMain.bmp" />
+    <None Remove="Images\Logotip.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +32,7 @@
   <ItemGroup>
     <Resource Include="Images\logo.bmp" />
     <Resource Include="Images\LogoMain.bmp" />
+    <Resource Include="Images\Logotip.jpg" />
   </ItemGroup>
 
 </Project>

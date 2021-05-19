@@ -34,7 +34,15 @@ namespace AllDeductedBusinessLogic.BusinessLogics
             }
             else
             {
-                _studyingStatusStorage.Insert(model);
+                _studyingStatusStorage.Insert(new StudyingStatusBindingModel
+                { 
+                    StudyingBase = model.StudyingBase,
+                    StudyingForm = model.StudyingForm,
+                    Course = model.Course,
+                    DateCreate = DateTime.Now,
+                    StudentId = model.StudentId,
+                    ProviderId = model.ProviderId
+                });
             }
         }
         public void Delete(StudyingStatusBindingModel model)

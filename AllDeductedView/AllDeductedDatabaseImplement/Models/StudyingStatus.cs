@@ -16,6 +16,9 @@ namespace AllDeductedDatabaseImplement.Models
         [Column("student_id")]
         public int StudentId { get; set; }
         public virtual Student Student { get; set; }
+        [Column("date_create")]
+        [Required]
+        public DateTime DateCreate { get; set; }
         [Column("studying_form")]
         [Required]
         public StudyingForm StudyingForm { get; set; }

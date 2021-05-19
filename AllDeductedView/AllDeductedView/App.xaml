@@ -4,15 +4,15 @@
              xmlns:local="clr-namespace:AllDeductedView"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="General_backgroundBrush" Color="Black"></SolidColorBrush>
-        <SolidColorBrush x:Key="General_foregroundBrush" Color="White"></SolidColorBrush>
-        <SolidColorBrush x:Key="mainBlue" Color="#FF005F90"/>
+        <SolidColorBrush x:Key="foregroundBrush" Color="White"></SolidColorBrush>
+        <SolidColorBrush x:Key="backgroundBrush" Color="#FF005F90"/>
 
-        <FontFamily x:Key="General_fontFamily">Times New Roman</FontFamily>
-        <Style x:Key="General_button" TargetType="Button">
-            <Setter Property="Background" Value="{StaticResource mainBlue}"></Setter>
-            <Setter Property="Foreground" Value="{StaticResource General_foregroundBrush}"></Setter>
-            <Setter Property="FontFamily" Value="{StaticResource General_fontFamily}"></Setter>
+        <FontFamily x:Key="fontFamily">Times New Roman</FontFamily>
+       
+        <Style x:Key="button" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource backgroundBrush}"></Setter>
+            <Setter Property="Foreground" Value="{StaticResource foregroundBrush}"></Setter>
+            <Setter Property="FontFamily" Value="{StaticResource fontFamily}"></Setter>
             <Setter Property="Height" Value="25"></Setter>
             <Setter Property="Template">
                 <Setter.Value>
@@ -20,11 +20,6 @@
                         <Grid x:Name="Help" Background="{TemplateBinding Background}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background"  TargetName="Help" Value="Gray"></Setter>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

@@ -2,6 +2,7 @@
 using AllDeductedBusinessLogic.Interfaces;
 using AllDeductedBusinessLogic.ViewModels;
 using AllDeductedDatabaseImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,12 +60,20 @@ namespace AllDeductedDatabaseImplement.Implements
             using (var context = new Context())
             {
                 return context.Students
+                .Include(rec => rec.Thread)
+                .ThenInclude(rec => rec.Disciplines)
                 .Select(rec => new StudentViewModel
                 {
                     Id = rec.Id,
                     FirstName = rec.FirstName,
                     LastName = rec.LastName,
-                    Patronymic = rec.Patronymic
+                    Patronymic = rec.Patronymic,
+                    Disciplines = rec.Thread.Disciplines.Select(rec => new DisciplineViewModel
+                    { 
+                        Id = rec.Id,
+                        Name = rec.Name,
+                        HoursCount = rec.HoursCount,
+                    }).ToList(),
                 })
                 .ToList();
             }
@@ -75,12 +84,20 @@ namespace AllDeductedDatabaseImplement.Implements
             using (var context = new Context())
             {
                 return context.Students
+                .Include(rec => rec.Thread)
+                .ThenInclude(rec => rec.Disciplines)
                 .Select(rec => new StudentViewModel
                 {
                     Id = rec.Id,
                     FirstName = rec.FirstName,
                     LastName = rec.LastName,
-                    Patronymic = rec.Patronymic
+                    Patronymic = rec.Patronymic,
+                    Disciplines = rec.Thread.Disciplines.Select(rec => new DisciplineViewModel
+                    {
+                        Id = rec.Id,
+                        Name = rec.Name,
+                        HoursCount = rec.HoursCount,
+                    }).ToList(),
                 })
                 .ToList();
             }

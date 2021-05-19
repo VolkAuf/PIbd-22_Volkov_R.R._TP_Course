@@ -9,24 +9,23 @@
         Title="OrdersWindow" Height="450" Width="500">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0"/>
-        <DataGrid x:Name="dataGridOrders" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="false">
+        <DataGrid x:Name="dataGridOrders" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="false">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер приказа" Binding="{Binding Id}" Width="0.2*"/>
                 <DataGridTextColumn Header="Дата создания" Binding="{Binding DateCreate}" Width="0.3*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" VerticalAlignment="Top">
-            <Button Content="Добавить" Style="{StaticResource General_button}" Margin="20" Click="ButtonAdd_Click"/>
-            <Button Content="Изменить" Style="{StaticResource General_button}" Margin="20" Click="ButtonUpd_Click"/>
-            <Button Content="Удалить" Style="{StaticResource General_button}" Margin="20" Click="ButtonDel_Click"/>
-            <Button Content="Обновить" Style="{StaticResource General_button}" Margin="20" Click="ButtonRef_Click"/>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+            <Button Content="Добавить" Width="70" Height="30" Style="{StaticResource button}" Margin="20" Click="ButtonAdd_Click"/>
+            <Button Content="Изменить" Width="70" Height="30" Style="{StaticResource button}" Margin="20" Click="ButtonUpd_Click"/>
+            <Button Content="Удалить" Width="70" Height="30" Style="{StaticResource button}" Margin="20" Click="ButtonDel_Click"/>
+            <Button Content="Обновить" Width="70" Height="30" Style="{StaticResource button}" Margin="20" Click="ButtonRef_Click"/>
         </StackPanel>
     </Grid>
 </Window>

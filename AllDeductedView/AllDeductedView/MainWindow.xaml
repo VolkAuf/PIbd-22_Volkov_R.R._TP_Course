@@ -6,52 +6,15 @@
         xmlns:local="clr-namespace:AllDeductedView"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+
     <Window.Resources>
         <Style TargetType="DockPanel" x:Key="MainMenu">
-            <Setter Property="Background" Value="{StaticResource General_foregroundBrush}"></Setter>
-        </Style>
-        <Style TargetType="Button" x:Key="MainMenu_button">
-            <Setter Property="Background" Value="{StaticResource mainBlue}"></Setter>
-            <Setter Property="Foreground" Value="{StaticResource General_foregroundBrush}"></Setter>
-            <Setter Property="FontFamily" Value="{StaticResource General_fontFamily}"></Setter>
-            <Setter Property="FontWeight" Value="Bold"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Grid Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <EventTrigger RoutedEvent="MouseEnter">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="White" Duration="0:0:0.25">
-                            </ColorAnimation>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="#FF005F90" Duration="0:0:0.25">
-                            </ColorAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-                <EventTrigger RoutedEvent="MouseLeave">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="#FF005F90" Duration="0:0:0.25">
-                            </ColorAnimation>
-                            <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:0.25">
-                            </ColorAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Style.Triggers>
+            <Setter Property="Background" Value="{StaticResource foregroundBrush}"></Setter>
         </Style>
     </Window.Resources>
+    
     <DockPanel LastChildFill="True" Style="{StaticResource MainMenu}">
-        <!--Меню-->
-        <Grid DockPanel.Dock="Top" Height="60">
+        <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
@@ -64,31 +27,28 @@
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Студенты" Style="{StaticResource MainMenu_button}" Click="ButtonStudent_Click"/>
-            <Button Grid.Column="1" Content="Приказы" Style="{StaticResource MainMenu_button}" Click="ButtonOrder_Click"/>
-            <Button Grid.Column="2" Style="{StaticResource MainMenu_button}" Click="ButtonStatus_Click">
+            <Button Grid.Column="0" Margin="5" Content="Студенты" Style="{StaticResource button}" Click="ButtonStudent_Click"/>
+            <Button Grid.Column="1" Margin="5" Content="Приказы" Style="{StaticResource button}" Click="ButtonOrder_Click"/>
+            <Button Grid.Column="2" Margin="5" Style="{StaticResource button}" Click="ButtonStatus_Click">
                 <Button.Content>
                     <TextBlock Text="Статусы студентов" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="3" Style="{StaticResource MainMenu_button}" Click="ButtonReportDiscipline_Click">
+            <Button Grid.Column="3" Margin="5" Style="{StaticResource button}" Click="ButtonReportDiscipline_Click">
                 <Button.Content>
                     <TextBlock Text="Список дисциплин" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="4" Style="{StaticResource MainMenu_button}" Click="ButtonLink_Click">
+            <Button Grid.Column="4" Margin="5" Style="{StaticResource button}" Click="ButtonLink_Click">
                 <Button.Content>
                     <TextBlock Text="Привязка групп" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
                 </Button.Content>
             </Button>
-            <Button Grid.Column="5" Content="Отчет" Style="{StaticResource MainMenu_button}"/>
-            <Button Grid.Column="6" Content="Выход" Style="{StaticResource MainMenu_button}" Click="ButtonExit_Click"/>
+            <Button Grid.Column="5" Margin="5" Content="Отчет" Style="{StaticResource button}" Click="ButtonReport_Click"/>
+            <Button Grid.Column="6" Margin="5" Content="Выход" Style="{StaticResource button}" Click="ButtonExit_Click"/>
         </Grid>
-        <!--Подвал-->
-        
-        <!--Графика-->
         <Canvas HorizontalAlignment="Center" Width="650" Height="300" VerticalAlignment="Center">
-            <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\Images\logo.bmp" Height="300" Width="650" />
+            <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\Images\logotip.jpg" Height="300" Width="650" />
         </Canvas>
     </DockPanel>
 </Window>

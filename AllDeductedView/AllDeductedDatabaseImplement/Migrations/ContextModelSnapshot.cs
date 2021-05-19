@@ -235,6 +235,10 @@ namespace AllDeductedDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("course");
 
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("date_create");
+
                     b.Property<int>("ProviderId")
                         .HasColumnType("integer")
                         .HasColumnName("provider_id");

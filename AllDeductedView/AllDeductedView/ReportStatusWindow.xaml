@@ -1,0 +1,49 @@
+﻿<Window x:Class="AllDeductedView.ReportStatusWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AllDeductedView"
+        mc:Ignorable="d"
+        Title="ReportStatusWindow" Height="400" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="6*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+            <Label Content="c" FontSize="22" Margin="10" FontFamily="{StaticResource fontFamily}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+            <DatePicker x:Name="DatePikerFrom" Height="30" Width="120" SelectedDateFormat="Short">
+            </DatePicker>
+            <Label Content="по" FontSize="22" Margin="10" FontFamily="{StaticResource fontFamily}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"></Label>
+            <DatePicker x:Name="DatePikerTo" Height="30" Width="120" SelectedDateFormat="Short">
+            </DatePicker>
+            <Button Content="Сформировать" Width="90" Style="{StaticResource button}" Margin="20" Click="ButtonMake_Click"></Button>
+            <Button Content="в PDF" Width="60" Style="{StaticResource button}" Margin="10" Click="ButtonToPdf_Click"></Button>
+            <Button Content="Почта" Width="60" Style="{StaticResource button}" Margin="10"></Button>
+        </StackPanel>
+        <Label HorizontalAlignment="Center" Grid.Row="1" FontSize="22" FontFamily="{StaticResource fontFamily}">Список статусов</Label>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Label HorizontalAlignment="Center" FontSize="18" FontFamily="{StaticResource fontFamily}" HorizontalContentAlignment="Center">c</Label>
+            <Label x:Name="textBoxDateFrom" HorizontalAlignment="Center" Width="100" FontFamily="{StaticResource fontFamily}" HorizontalContentAlignment="Center"></Label>
+            <Label HorizontalAlignment="Center" FontSize="18" FontFamily="{StaticResource fontFamily}" HorizontalContentAlignment="Center" >по</Label>
+            <Label x:Name="textBoxDateTo" HorizontalAlignment="Center" Width="100" FontFamily="{StaticResource fontFamily}" HorizontalContentAlignment="Center"></Label>
+        </StackPanel>
+        <DataGrid x:Name="dataGridStudyingStatuses" Grid.Row="3" AutoGenerateColumns="False" CanUserAddRows="false">
+            <DataGrid.Columns>
+                <DataGridTextColumn Visibility="Hidden" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Поток" Binding="{Binding ThreadName}" Width="0.4*"/>
+                <DataGridTextColumn Header="Зачетка" Binding="{Binding StudentId}" Width="0.4*"/>
+                <DataGridTextColumn Header="Форма обучения" Binding="{Binding StudyingForm}" Width="0.3*"/>
+                <DataGridTextColumn Header="Основа обучения" Binding="{Binding StudyingBase}" Width="0.3*"/>
+                <DataGridTextColumn Header="Курс" Binding="{Binding Course}" Width="0.3*"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding DateCreate}" Width="0.3*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

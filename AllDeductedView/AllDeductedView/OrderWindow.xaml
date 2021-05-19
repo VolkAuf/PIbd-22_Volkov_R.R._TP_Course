@@ -9,25 +9,24 @@
         Title="OrderWindow" Height="250" Width="600">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="4*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DataGrid Grid.Column="0"/>
-        <DataGrid x:Name="dataGridStudents" Grid.Column="0" AutoGenerateColumns="False" CanUserAddRows="false">
+        <DataGrid x:Name="dataGridStudents" Grid.Row="0" AutoGenerateColumns="False" CanUserAddRows="false">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Зачётная книга студента" Binding="{Binding Id}" Width="0.2*"/>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding LastName}" Width="0.3*"/>
             </DataGrid.Columns>
         </DataGrid>
         
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Grid.Column="1">
-            <Button Content="Добавить" Width="80" Style="{StaticResource General_button}" Margin="10" Click="ButtonAdd_Click"></Button>
-            <Button Content="Сохранить" Width="80" Style="{StaticResource General_button}" Margin="10" Click="ButtonSave_Click"></Button>
-            <Button Content="Удалить" Width="80" Style="{StaticResource General_button}" Margin="10" Click="ButtonDell_Click"></Button>
-            <Button Content="Отмена" Width="80" Style="{StaticResource General_button}" Margin="10" Click="ButtonCancel_Click"></Button>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Bottom">
+            <Button Content="Добавить" Width="70" Style="{StaticResource button}" Margin="10" Click="ButtonAdd_Click"></Button>
+            <Button Content="Сохранить" Width="70" Style="{StaticResource button}" Margin="10" Click="ButtonSave_Click"></Button>
+            <Button Content="Удалить" Width="70" Style="{StaticResource button}" Margin="10" Click="ButtonDell_Click"></Button>
+            <Button Content="Отмена" Width="70" Style="{StaticResource button}" Margin="10" Click="ButtonCancel_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

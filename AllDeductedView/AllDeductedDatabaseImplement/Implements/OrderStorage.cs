@@ -67,7 +67,7 @@ namespace AllDeductedDatabaseImplement.Implements
                 .ThenInclude(rec => rec.Student)
                 .Include(rec => rec.OrderGroups)
                 .ThenInclude(rec => rec.Group)
-                .Where(rec => rec.Id == model.Id)
+                .Where(rec => (rec.ProviderId == model.ProviderId))
                 .ToList()
                 .Select(rec => new OrderViewModel
                 {
@@ -76,8 +76,7 @@ namespace AllDeductedDatabaseImplement.Implements
                     Students = rec.OrderStudents
                 .ToDictionary(recPC => recPC.StudentId, recPC => recPC.Student?.LastName),
                     Groups = rec.OrderGroups
-                .ToDictionary(recPC => recPC.GroupId, recPC => recPC.Group?.Name)
-
+                .ToDictionary(recPC => recPC.GroupId, recPC => recPC.Group?.Name),
                 })
                 .ToList();
             }

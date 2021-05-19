@@ -53,7 +53,14 @@ namespace AllDeductedView
         }
         private void ButtonReportDiscipline_Click(object sender, RoutedEventArgs e)
         {
+            var window = Container.Resolve<ListDisciplineWindow>();
+            window.ShowDialog();
+        }
 
+        private void ButtonReport_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<ReportStatusWindow>();
+            window.ShowDialog();
         }
 
         private void ButtonExit_Click(object sender, RoutedEventArgs e)

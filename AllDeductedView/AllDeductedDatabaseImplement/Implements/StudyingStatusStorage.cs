@@ -2,6 +2,7 @@
 using AllDeductedBusinessLogic.Interfaces;
 using AllDeductedBusinessLogic.ViewModels;
 using AllDeductedDatabaseImplement.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,12 +44,14 @@ namespace AllDeductedDatabaseImplement.Implements
             using (var context = new Context())
             {
                 StudyingStatus studyingStatus = context.StudyingStatuses
+                .Include(rec => rec.Provider)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return studyingStatus != null ?
                 new StudyingStatusViewModel
                 {
                     Id = studyingStatus.Id,
                     StudentId = studyingStatus.StudentId,
+                    DateCreate = studyingStatus.DateCreate,
                     StudyingForm = studyingStatus.StudyingForm,
                     StudyingBase = studyingStatus.StudyingBase,
                     Course = studyingStatus.Course
@@ -66,13 +69,22 @@ namespace AllDeductedDatabaseImplement.Implements
             using (var context = new Context())
             {
                 return context.StudyingStatuses
+                .Include(rec => rec.Student)
+                .ThenInclude(rec => rec.Thread)
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date 
+                && rec.DateCreate.Date <= model.DateTo.Value.Date))
+                .ToList()
+                .Where(rec => rec.Student.Thread != null)
                 .Select(rec => new StudyingStatusViewModel
                 {
                     Id = rec.Id,
                     StudentId = rec.StudentId,
+                    DateCreate = rec.DateCreate,
                     StudyingForm = rec.StudyingForm,
                     StudyingBase = rec.StudyingBase,
-                    Course = rec.Course
+                    Course = rec.Course,
+                    ThreadName = rec.Student.Thread?.Name
                 })
                 .ToList();
             }
@@ -89,7 +101,8 @@ namespace AllDeductedDatabaseImplement.Implements
                     StudentId = rec.StudentId,
                     StudyingForm = rec.StudyingForm,
                     StudyingBase = rec.StudyingBase,
-                    Course = rec.Course
+                    Course = rec.Course,
+                    DateCreate = rec.DateCreate
                 })
                 .ToList();
             }
@@ -99,8 +112,31 @@ namespace AllDeductedDatabaseImplement.Implements
         {
             using (var context = new Context())
             {
-                context.Add(CreateModel(model, new StudyingStatus(), context));
-                context.SaveChanges();
+                using (var transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        StudyingStatus status = new StudyingStatus
+                        {
+                        DateCreate = DateTime.Now,
+                        ProviderId = model.ProviderId,
+                        StudentId = model.StudentId,
+                        StudyingBase = model.StudyingBase,
+                        StudyingForm = model.StudyingForm,
+                        Course = model.Course
+                        };
+                    context.StudyingStatuses.Add(status);
+                    context.SaveChanges();
+                    CreateModel(model, status, context);
+                        context.SaveChanges();
+                        transaction.Commit();
+                    }
+                    catch
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
             }
         }
 
@@ -125,26 +161,26 @@ namespace AllDeductedDatabaseImplement.Implements
             {
                 return null;
             }
-
-                Student element = context.Students.FirstOrDefault(rec => rec.Id == model.StudentId);
-                if (element != null)
+                
+            Student element = context.Students.FirstOrDefault(rec => rec.Id == model.StudentId);
+            if (element != null)
+            {
+                if (element.StudyingStatus == null)
                 {
-                    if (element.StudyingStatus == null)
-                    {
-                        element.StudyingStatus = new StudyingStatus();
-                    }
-                    studyingStatus.StudyingBase = model.StudyingBase;
-                    studyingStatus.StudyingForm = model.StudyingForm;
-                    studyingStatus.ProviderId = model.ProviderId;
-                    studyingStatus.Course = model.Course;
-                    studyingStatus.StudentId = model.StudentId;
-                    element.StudyingStatus = studyingStatus;
-                    context.Students.Update(element);
+                    element.StudyingStatus = new StudyingStatus();
                 }
-                else
-                {
-                    throw new Exception("Элемент не найден");
-                }
+                studyingStatus.StudyingBase = model.StudyingBase;
+                studyingStatus.StudyingForm = model.StudyingForm;
+                studyingStatus.ProviderId = model.ProviderId;
+                studyingStatus.Course = model.Course;
+                studyingStatus.StudentId = model.StudentId;
+                element.StudyingStatus = studyingStatus;
+                context.Students.Update(element);
+            }
+            else
+            {
+                throw new Exception("Элемент не найден");
+            }
             return studyingStatus;
         }
     }

@@ -15,5 +15,9 @@ namespace AllDeductedBusinessLogic.ViewModels
         public string LastName { get; set; }
         [DisplayName("Отчество")]
         public string Patronymic { get; set; }
+
+        public List<DisciplineViewModel> Disciplines { get; set; }
+
+        //public List<StudyingStatusViewModel> Statuses { get; set; }
     }
 }

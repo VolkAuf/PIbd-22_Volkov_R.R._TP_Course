@@ -12,7 +12,7 @@ namespace AllDeductedDatabaseImplement
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=course;Username=postgres;Password=1234");
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=course;Username=Rafael;Password=1234");
             }
             base.OnConfiguring(optionsBuilder);
         }
