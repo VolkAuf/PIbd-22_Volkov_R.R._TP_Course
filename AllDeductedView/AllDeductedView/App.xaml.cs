@@ -1,7 +1,9 @@
 ﻿using AllDeductedBusinessLogic.BusinessLogics;
+using AllDeductedBusinessLogic.BusinessLogics.Report;
 using AllDeductedBusinessLogic.Interfaces;
 using AllDeductedBusinessLogic.ViewModels;
 using AllDeductedDatabaseImplement.Implements;
+using System.Configuration;
 using System.Windows;
 using Unity;
 using Unity.Lifetime;
@@ -18,6 +20,14 @@ namespace AllDeductedView
         {
             base.OnStartup(e);
             var container = BuildUnityContainer();
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+                MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
+                MailName = ConfigurationManager.AppSettings["MailName"]
+            });
             var loginWindow = container.Resolve<LoginWindow>();
             loginWindow.ShowDialog();
         }
@@ -38,6 +48,7 @@ namespace AllDeductedView
             currentContainer.RegisterType<GroupLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ThreadLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<MailLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

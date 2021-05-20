@@ -1,5 +1,7 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
+using AllDeductedBusinessLogic.BusinessLogics.Report;
+using AllDeductedBusinessLogic.HelperModels.Mail;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,7 @@ namespace AllDeductedView
         [Dependency]
         public IUnityContainer Container { get; set; }
         private readonly ReportLogic logic;
+        private readonly MailLogic mailLogic;
 
         public ReportStatusWindow(ReportLogic logic)
         {
@@ -67,7 +70,6 @@ namespace AllDeductedView
                 MessageBox.Show("Выберите даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-
             if (DatePikerFrom.SelectedDate >= DatePikerTo.SelectedDate)
             {
                 MessageBox.Show("Дата указана неверно", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -96,6 +98,42 @@ namespace AllDeductedView
 
         }
 
-
+        private void ButtonMail_Click(object sender, RoutedEventArgs e)
+        {
+            if (DatePikerTo.SelectedDate == null || DatePikerFrom.SelectedDate == null)
+            {
+                MessageBox.Show("Выберите даты", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (DatePikerFrom.SelectedDate >= DatePikerTo.SelectedDate)
+            {
+                MessageBox.Show("Дата указана неверно", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            try
+            {
+                var fileName = "Report.pdf";
+                logic.SaveToPdfFile(new ReportBindingModel
+                {
+                    FileName = fileName,
+                    DateFrom = DatePikerFrom.SelectedDate,
+                    DateTo = DatePikerTo.SelectedDate
+                });
+                MailLogic.MailSend(new MailSendInfo
+                {
+                    MailAddress = App.SelectProvider.Mail,
+                    Subject = "Отчет по статусам",
+                    Text = "Отчет по статусам от " + DatePikerFrom.SelectedDate.Value.ToShortDateString() + " по " + DatePikerTo.SelectedDate.Value.ToShortDateString(),
+                    FileName = fileName
+                });
+                MessageBox.Show("Выполнено", "Успех", MessageBoxButton.OK,
+                MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+            }
+        }
     }
 }

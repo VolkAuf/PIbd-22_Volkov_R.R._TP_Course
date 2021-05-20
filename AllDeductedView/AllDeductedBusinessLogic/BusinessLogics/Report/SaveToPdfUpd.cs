@@ -17,9 +17,10 @@ namespace AllDeductedBusinessLogic.BusinessLogics
             PdfWriter writer = new PdfWriter(info.FileName);
             PdfDocument pdf = new PdfDocument(writer);
             Document document = new Document(pdf);
+            PdfFont font = PdfFontFactory.CreateFont();
 
-            AddParagraphCenter(info.Title, document);
-            AddParagraphCenter($"с {info.DateFrom.ToShortDateString()} по { info.DateTo.ToShortDateString()}", document);
+            AddParagraphCenter(info.Title, document,font);
+            AddParagraphCenter($"с {info.DateFrom.ToShortDateString()} по { info.DateTo.ToShortDateString()}",document,font);
 
             Table tableStatuses = new Table(6, false);
             tableStatuses.SetWidth(new UnitValue(UnitValue.PERCENT, 100));
@@ -27,7 +28,7 @@ namespace AllDeductedBusinessLogic.BusinessLogics
 
             Cell threadCell = new Cell(1, 1)
                 .SetTextAlignment(TextAlignment.CENTER)
-                .Add(new Paragraph("Поток"));
+                .Add(new Paragraph("Поток")).SetFont(font);
 
             Cell StudentCell = new Cell(1, 1)
                 .SetTextAlignment(TextAlignment.CENTER)
@@ -73,7 +74,7 @@ namespace AllDeductedBusinessLogic.BusinessLogics
 
                 BaseCell = new Cell(1, 1)
                     .SetTextAlignment(TextAlignment.CENTER)
-                    .Add(new Paragraph(Enum.GetName(typeof(StudyingBase), status.StudyingBase)));
+                    .Add(new Paragraph(Enum.GetName(typeof(StudyingForm), status.StudyingBase)));
 
                 CoursCell = new Cell(1, 1)
                     .SetTextAlignment(TextAlignment.CENTER)
@@ -94,11 +95,11 @@ namespace AllDeductedBusinessLogic.BusinessLogics
             document.Close();
         }
 
-        private static void AddParagraphCenter(string text, Document document)
+        private static void AddParagraphCenter(string text, Document document, PdfFont font)
         {
             Paragraph paragraph = new Paragraph(text)
                .SetTextAlignment(TextAlignment.CENTER)
-               .SetFontSize(20);
+               .SetFontSize(20).SetFont(font);
 
             document.Add(paragraph);
         }
