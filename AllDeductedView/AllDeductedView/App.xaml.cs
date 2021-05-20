@@ -1,8 +1,10 @@
 ﻿using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.BusinessLogics.Report;
+using AllDeductedBusinessLogic.HelperModels.Mail;
 using AllDeductedBusinessLogic.Interfaces;
 using AllDeductedBusinessLogic.ViewModels;
 using AllDeductedDatabaseImplement.Implements;
+using System;
 using System.Configuration;
 using System.Windows;
 using Unity;
@@ -25,8 +27,7 @@ namespace AllDeductedView
                 SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
                 SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
                 MailLogin = ConfigurationManager.AppSettings["MailLogin"],
-                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
-                MailName = ConfigurationManager.AppSettings["MailName"]
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"]
             });
             var loginWindow = container.Resolve<LoginWindow>();
             loginWindow.ShowDialog();

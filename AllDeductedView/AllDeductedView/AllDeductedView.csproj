@@ -11,14 +11,6 @@
     <None Remove="Images\LogoMain.bmp" />
     <None Remove="Images\Logotip.jpg" />
   </ItemGroup>
-  
-  <ImportGroup>
-    <add key="SmtpClientHost" value="smtp.gmail.com" />
-    <add key="SmtpClientPort" value="587" />
-    <add key="MailLogin" value="volkov.rafael2001@gmail.com" />
-    <add key="MailPassword" value="Rafael20)!" />
-    <add key="MailName" value="Вы отчисленны" />
-  </ImportGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
