@@ -235,9 +235,9 @@ namespace AllDeductedDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("course");
 
-                    b.Property<DateTime>("DateCreate")
+                    b.Property<DateTime>("EnrollmentDate")
                         .HasColumnType("timestamp without time zone")
-                        .HasColumnName("date_create");
+                        .HasColumnName("enrollment_date");
 
                     b.Property<int>("ProviderId")
                         .HasColumnType("integer")
@@ -247,12 +247,14 @@ namespace AllDeductedDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
-                    b.Property<int>("StudyingBase")
-                        .HasColumnType("integer")
+                    b.Property<string>("StudyingBase")
+                        .IsRequired()
+                        .HasColumnType("varchar(24)")
                         .HasColumnName("studying_base");
 
-                    b.Property<int>("StudyingForm")
-                        .HasColumnType("integer")
+                    b.Property<string>("StudyingForm")
+                        .IsRequired()
+                        .HasColumnType("varchar(24)")
                         .HasColumnName("studying_form");
 
                     b.HasKey("Id");

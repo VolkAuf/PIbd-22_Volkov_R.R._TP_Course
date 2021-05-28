@@ -1,6 +1,7 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,11 +25,13 @@ namespace AllDeductedView
         [Dependency]
         public IUnityContainer Container { get; set; }
         private readonly OrderLogic logic;
+        private readonly Logger logger;
 
         public OrdersWindow(OrderLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void OrdersWindow_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +42,10 @@ namespace AllDeductedView
         {
             try
             {
-                var list = logic.Read(null);
+                var list = logic.Read( new OrderBindingModel
+                {
+                    ProviderId = App.SelectProvider.Id
+                });
                 if (list != null)
                 {
                     dataGridOrders.ItemsSource = list;
@@ -47,6 +53,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка загрузки данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -88,6 +95,7 @@ namespace AllDeductedView
                     }
                     catch (Exception ex)
                     {
+                        logger.Error("Ошибка удаления данных : " + ex.Message);
                         MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     LoadData();

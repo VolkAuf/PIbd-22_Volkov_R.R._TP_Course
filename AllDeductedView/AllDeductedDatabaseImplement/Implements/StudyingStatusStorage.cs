@@ -51,7 +51,7 @@ namespace AllDeductedDatabaseImplement.Implements
                 {
                     Id = studyingStatus.Id,
                     StudentId = studyingStatus.StudentId,
-                    DateCreate = studyingStatus.DateCreate,
+                    DateCreate = studyingStatus.EnrollmentDate,
                     StudyingForm = studyingStatus.StudyingForm,
                     StudyingBase = studyingStatus.StudyingBase,
                     Course = studyingStatus.Course
@@ -69,18 +69,18 @@ namespace AllDeductedDatabaseImplement.Implements
             using (var context = new Context())
             {
                 return context.StudyingStatuses
+                .Include(rec => rec.Provider)
                 .Include(rec => rec.Student)
                 .ThenInclude(rec => rec.Thread)
-                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
-                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date 
-                && rec.DateCreate.Date <= model.DateTo.Value.Date))
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.EnrollmentDate.Date == model.DateCreate.Date) 
+                || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.EnrollmentDate.Date >= model.DateFrom.Value.Date 
+                && rec.EnrollmentDate.Date <= model.DateTo.Value.Date) || (rec.ProviderId == model.ProviderId))
                 .ToList()
-                .Where(rec => rec.Student.Thread != null)
                 .Select(rec => new StudyingStatusViewModel
                 {
                     Id = rec.Id,
                     StudentId = rec.StudentId,
-                    DateCreate = rec.DateCreate,
+                    DateCreate = rec.EnrollmentDate,
                     StudyingForm = rec.StudyingForm,
                     StudyingBase = rec.StudyingBase,
                     Course = rec.Course,
@@ -102,7 +102,7 @@ namespace AllDeductedDatabaseImplement.Implements
                     StudyingForm = rec.StudyingForm,
                     StudyingBase = rec.StudyingBase,
                     Course = rec.Course,
-                    DateCreate = rec.DateCreate
+                    DateCreate = rec.EnrollmentDate
                 })
                 .ToList();
             }
@@ -118,7 +118,7 @@ namespace AllDeductedDatabaseImplement.Implements
                     {
                         StudyingStatus status = new StudyingStatus
                         {
-                        DateCreate = DateTime.Now,
+                        EnrollmentDate = DateTime.Now,
                         ProviderId = model.ProviderId,
                         StudentId = model.StudentId,
                         StudyingBase = model.StudyingBase,

@@ -23,7 +23,7 @@ namespace AllDeductedBusinessLogic.BusinessLogics
             if (model.Id.HasValue)
             {
                 return new List<OrderViewModel> { _orderStorage.GetElement(model) };
-            }
+            }           
             return _orderStorage.GetFilteredList(model);
         }
         public void CreateOrUpdateOrder(OrderBindingModel model)

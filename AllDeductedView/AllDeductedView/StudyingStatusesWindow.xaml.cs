@@ -1,17 +1,9 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
+using NLog;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Unity;
 
 namespace AllDeductedView
@@ -24,11 +16,13 @@ namespace AllDeductedView
         [Dependency]
         public IUnityContainer Container { get; set; }
         private readonly StudyingStatusLogic logic;
+        private readonly Logger logger;
 
         public StudyingStatusesWindow(StudyingStatusLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void StudyingStatusWindow_Loaded(object sender, RoutedEventArgs e)
@@ -39,7 +33,10 @@ namespace AllDeductedView
         {
             try
             {
-                var list = logic.Read(null);
+                var list = logic.Read( new StudyingStatusBindingModel
+                {
+                    ProviderId = App.SelectProvider.Id
+                });
                 if (list != null)
                 {
                     dataGridStudyingStatuses.ItemsSource = list;
@@ -47,6 +44,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка загрузки данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -88,6 +86,7 @@ namespace AllDeductedView
                     }
                     catch (Exception ex)
                     {
+                        logger.Error("Ошибка удаления данных : " + ex.Message);
                         MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     LoadData();

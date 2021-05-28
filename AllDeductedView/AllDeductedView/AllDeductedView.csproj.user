@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="DiagramWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ListDisciplineWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -45,6 +48,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="DiagramWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="ListDisciplineWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -68,5 +68,11 @@ namespace AllDeductedView
             DialogResult = false;
             Close();
         }
+
+        private void ButtonDiag_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Container.Resolve<DiagramWindow>();
+            window.ShowDialog();
+        }
     }
 }

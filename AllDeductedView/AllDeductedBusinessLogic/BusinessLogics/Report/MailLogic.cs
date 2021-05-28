@@ -13,7 +13,6 @@ namespace AllDeductedBusinessLogic.BusinessLogics.Report
         private static int smtpClientPort;
         private static string mailLogin;
         private static string mailPassword;
-        private static string mailName;
         public static void MailConfig(MailConfig config)
         {
             smtpClientHost = config.SmtpClientHost;
@@ -28,7 +27,7 @@ namespace AllDeductedBusinessLogic.BusinessLogics.Report
             {
                 return;
             }
-            if (string.IsNullOrEmpty(mailLogin) || string.IsNullOrEmpty(mailPassword) || string.IsNullOrEmpty(mailName))
+            if (string.IsNullOrEmpty(mailLogin) || string.IsNullOrEmpty(mailPassword))
             {
                 return;
             }
@@ -42,7 +41,7 @@ namespace AllDeductedBusinessLogic.BusinessLogics.Report
                 {
                     try
                     {
-                        objMailMessage.From = new MailAddress(mailLogin, mailName);
+                        objMailMessage.From = new MailAddress(mailLogin);
                         objMailMessage.To.Add(new MailAddress(info.MailAddress));
                         objMailMessage.Subject = info.Subject;
                         objMailMessage.Body = info.Text;

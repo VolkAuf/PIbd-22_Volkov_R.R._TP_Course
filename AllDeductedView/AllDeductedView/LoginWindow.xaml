@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AllDeductedView"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="350" Width="500">
+        Title="LoginWindow" Height="350" Width="600">
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" >
-            <Label Content="Вход в систему"  Margin="10,5" FontSize="24" FontFamily="{StaticResource fontFamily}" FontWeight="Bold" BorderBrush="{StaticResource backgroundBrush}" HorizontalAlignment="Center"></Label>
+            <Label Content="Вход в систему"  Margin="10" FontSize="24" FontFamily="{StaticResource fontFamily}" FontWeight="Bold" BorderBrush="{StaticResource backgroundBrush}" HorizontalAlignment="Center"></Label>
             <Label Content="Логин" FontSize="22" Margin="10,5" FontFamily="{StaticResource fontFamily}" ></Label>
-            <TextBox x:Name="textBoxEmail" Height="25" Margin="10,5" FontSize="22" FontFamily="{StaticResource fontFamily}"></TextBox>
-            <Label Content="Пароль" FontSize="22" Margin="10,5" FontFamily="{StaticResource fontFamily}"></Label>
-            <PasswordBox x:Name="passwordBox" Height="25" Margin="10,5" FontSize="20"></PasswordBox>
+            <TextBox x:Name="textBoxEmail" Height="25" Margin="10" FontSize="22" FontFamily="{StaticResource fontFamily}"></TextBox>
+            <Label Content="Пароль" FontSize="22" Margin="10" FontFamily="{StaticResource fontFamily}"></Label>
+            <PasswordBox x:Name="passwordBox" Height="25" Margin="10" FontSize="20"></PasswordBox>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>
@@ -21,8 +21,8 @@
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Войти" Height="40" Width="80" FontSize="24"  Margin="10,5" Style="{StaticResource button}" Click="ButtonLogin_Click"/>
-                <Button Grid.Column="1" Content="Зарегистрироваться" Height="40" Width="230" FontSize="24"  Margin="10,5" Style="{StaticResource button}" Click="ButtonRegistration_Click"/>
+                <Button Grid.Column="0" Content="Войти" Height="40" Width="80" FontSize="24"  Margin="10" Style="{StaticResource button}" Click="ButtonLogin_Click"/>
+                <Button Grid.Column="1" Content="Зарегистрироваться" Height="40" Width="250" FontSize="24"  Margin="10" Style="{StaticResource button}" Click="ButtonRegistration_Click"/>
             </Grid>
         </StackPanel>
     </Grid>

@@ -70,19 +70,19 @@ namespace AllDeductedBusinessLogic.BusinessLogics
 
         public bool Login(ProviderBindingModel model)
         {
-            var provider = storage.GetElement(
-                new ProviderBindingModel
+                var provider = storage.GetElement(
+                    new ProviderBindingModel
+                    {
+                        Login = model.Login,
+                        Mail = model.Mail
+                    });
+
+                if (provider == null || !provider.Password.Equals(model.Password))
                 {
-                    Login = model.Login,
-                    Mail = model.Mail
-                });
+                    throw new Exception("поставщик c такими данными не найден");
+                }
 
-            if (provider == null || !provider.Password.Equals(model.Password))
-            {
-                throw new Exception("поставщик c такими данными не найден");
-            }
-
-            return true;
+                return true;
         }
     }
 }

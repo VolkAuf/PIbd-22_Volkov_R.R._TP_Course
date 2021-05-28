@@ -62,13 +62,16 @@ namespace AllDeductedDatabaseImplement.Implements
                 return context.Students
                 .Include(rec => rec.Thread)
                 .ThenInclude(rec => rec.Disciplines)
+                .Include(rec=> rec.Provider)
+                .Where(rec => (rec.ProviderId == model.ProviderId))
+                .ToList()
                 .Select(rec => new StudentViewModel
                 {
                     Id = rec.Id,
                     FirstName = rec.FirstName,
                     LastName = rec.LastName,
                     Patronymic = rec.Patronymic,
-                    Disciplines = rec.Thread.Disciplines.Select(rec => new DisciplineViewModel
+                    Disciplines = rec.Thread?.Disciplines.Select(rec => new DisciplineViewModel
                     { 
                         Id = rec.Id,
                         Name = rec.Name,

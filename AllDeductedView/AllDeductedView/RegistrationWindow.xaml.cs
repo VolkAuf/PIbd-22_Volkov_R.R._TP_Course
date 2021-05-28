@@ -1,5 +1,6 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,10 +25,13 @@ namespace AllDeductedView
         [Dependency]
         public IUnityContainer Container { get; set; }
         private readonly ProviderLogic logic;
+        private readonly Logger logger;
+        private readonly int logPassLength = 50;
         public RegistrationWindow(ProviderLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -44,7 +48,7 @@ namespace AllDeductedView
             }
             if (string.IsNullOrEmpty(textBoxLogin.Text))
             {
-                MessageBox.Show("Заполните поле \"Почта\"", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Заполните поле \"Логин\"", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             if (string.IsNullOrEmpty(textBoxPassword.Text))
@@ -52,12 +56,21 @@ namespace AllDeductedView
                 MessageBox.Show("Заполните поле \"пароль\"", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+            if (textBoxPassword.Text.Length > logPassLength)
+            {
+                MessageBox.Show("Ограничение на пароль в 50 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             if (!Regex.IsMatch(textBoxMail.Text, @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"))
             {
                 MessageBox.Show("Почта введена некорректно", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            
+            if (textBoxMail.Text.Length > logPassLength)
+            {
+                MessageBox.Show("Ограничение на почту в 50 символов", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
             try
             {
                 logic.CreateOrUpdate(new ProviderBindingModel
@@ -74,6 +87,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка сохранения данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

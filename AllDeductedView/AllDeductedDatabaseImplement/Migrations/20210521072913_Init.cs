@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace AllDeductedDatabaseImplement.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -244,8 +244,9 @@ namespace AllDeductedDatabaseImplement.Migrations
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     student_id = table.Column<int>(type: "integer", nullable: false),
-                    studying_form = table.Column<int>(type: "integer", nullable: false),
-                    studying_base = table.Column<int>(type: "integer", nullable: false),
+                    enrollment_date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    studying_form = table.Column<string>(type: "varchar(24)", nullable: false),
+                    studying_base = table.Column<string>(type: "varchar(24)", nullable: false),
                     course = table.Column<int>(type: "integer", nullable: false),
                     provider_id = table.Column<int>(type: "integer", nullable: false)
                 },

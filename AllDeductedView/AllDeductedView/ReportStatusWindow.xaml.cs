@@ -3,6 +3,7 @@ using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.BusinessLogics.Report;
 using AllDeductedBusinessLogic.HelperModels.Mail;
 using Microsoft.Win32;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -26,12 +27,13 @@ namespace AllDeductedView
         [Dependency]
         public IUnityContainer Container { get; set; }
         private readonly ReportLogic logic;
-        private readonly MailLogic mailLogic;
+        private readonly Logger logger;
 
         public ReportStatusWindow(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void ButtonMake_Click(object sender, RoutedEventArgs e)
@@ -51,7 +53,8 @@ namespace AllDeductedView
                 var dataSource = logic.GetStatus(new ReportBindingModel
                 {
                     DateFrom = DatePikerFrom.SelectedDate,
-                    DateTo = DatePikerTo.SelectedDate
+                    DateTo = DatePikerTo.SelectedDate,
+                    ProviderId = App.SelectProvider.Id
                 });
                 dataGridStudyingStatuses.ItemsSource = dataSource;
                 textBoxDateFrom.Content = DatePikerFrom.SelectedDate.Value.ToLongDateString();
@@ -59,6 +62,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка формирования данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -91,11 +95,11 @@ namespace AllDeductedView
                     }
                     catch (Exception ex)
                     {
-                         MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        logger.Error("Ошибка создания .pdf : " + ex.Message);
+                        MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
             }
-
         }
 
         private void ButtonMail_Click(object sender, RoutedEventArgs e)
@@ -119,6 +123,7 @@ namespace AllDeductedView
                     DateFrom = DatePikerFrom.SelectedDate,
                     DateTo = DatePikerTo.SelectedDate
                 });
+                Console.WriteLine(App.SelectProvider.Mail);
                 MailLogic.MailSend(new MailSendInfo
                 {
                     MailAddress = App.SelectProvider.Mail,
@@ -131,6 +136,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка создания .pdf : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK,
                 MessageBoxImage.Error);
             }

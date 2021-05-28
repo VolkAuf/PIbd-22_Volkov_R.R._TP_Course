@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
@@ -10,6 +10,7 @@
     <None Remove="Images\logo.bmp" />
     <None Remove="Images\LogoMain.bmp" />
     <None Remove="Images\Logotip.jpg" />
+    <None Remove="Images\Roboto-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,7 +23,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="NLog" Version="4.7.5" />
     <PackageReference Include="Unity" Version="5.11.10" />
+    <PackageReference Include="WPFToolkit.DataVisualization" Version="3.5.50211.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -33,6 +36,7 @@
     <Resource Include="Images\logo.bmp" />
     <Resource Include="Images\LogoMain.bmp" />
     <Resource Include="Images\Logotip.jpg" />
+    <Resource Include="Images\Roboto-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>

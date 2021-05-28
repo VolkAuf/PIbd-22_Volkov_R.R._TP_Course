@@ -2,6 +2,7 @@
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.Enums;
 using AllDeductedBusinessLogic.ViewModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,16 +36,21 @@ namespace AllDeductedView
 
         private readonly StudyingStatusLogic logicSS;
         private readonly StudentLogic logicS;
+        private readonly Logger logger;
         public StudyingStatusWindow(StudyingStatusLogic logicSS, StudentLogic logicS)
         {
             InitializeComponent();
             this.logicSS = logicSS;
             this.logicS = logicS;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void StudyingStatusesWindow_Load(object sender, RoutedEventArgs e)
         {
-            List<StudentViewModel> list = logicS.Read(null);
+            List<StudentViewModel> list = logicS.Read(new StudentBindingModel
+            {
+                ProviderId = App.SelectProvider.Id
+            });
             if (list != null)
             {
                 comboBoxStudentId.ItemsSource = list;
@@ -113,6 +119,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка сохранения данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

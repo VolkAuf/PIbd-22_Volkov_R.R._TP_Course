@@ -2,6 +2,7 @@
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
 using Microsoft.Win32;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -27,11 +28,13 @@ namespace AllDeductedView
 
         private readonly ReportLogic reportLogic;
         private readonly StudentLogic studentLogic;
+        private readonly Logger logger;
         public ListDisciplineWindow(StudentLogic studentLogic, ReportLogic reportLogic)
         {
             this.studentLogic = studentLogic;
             this.reportLogic = reportLogic;
             InitializeComponent();
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         public void ListDisciplineWindow_Loaded(object sender, RoutedEventArgs e)
@@ -42,7 +45,10 @@ namespace AllDeductedView
         {
             try
             {
-                var list = studentLogic.Read(null);
+                var list = studentLogic.Read( new StudentBindingModel
+                {
+                    ProviderId = App.SelectProvider.Id
+                });
                 if (list != null)
                 {
                     dataGridStudents.ItemsSource = list;
@@ -50,6 +56,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка загрузки данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -83,7 +90,8 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
-                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                logger.Error("Ошибка создания файла .doc : " + ex.Message);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -116,6 +124,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка создания файла .xls : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

@@ -10,15 +10,15 @@
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="300">
             <Label Content="Регистрация"  Margin="5" FontSize="24" FontFamily="{StaticResource fontFamily}" FontWeight="Bold" BorderBrush="{StaticResource backgroundBrush}" HorizontalAlignment="Center"></Label>
             <Label Content="Имя" FontSize="22" Margin="5" FontFamily="{StaticResource fontFamily}"></Label>
-            <TextBox x:Name="textBoxFirstName" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
+            <TextBox x:Name="textBoxFirstName" FontSize="22" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
             <Label Content="Фамилия" FontSize="22" Margin="5" FontFamily="{StaticResource fontFamily}"></Label>
-            <TextBox x:Name="textBoxLastName" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
+            <TextBox x:Name="textBoxLastName" FontSize="22" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
             <Label Content="Логин" FontSize="22" Margin="5" FontFamily="{StaticResource fontFamily}"></Label>
-            <TextBox x:Name="textBoxLogin" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
+            <TextBox x:Name="textBoxLogin" FontSize="22" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
             <Label Content="Пароль" FontSize="22" Margin="5" FontFamily="{StaticResource fontFamily}" ></Label>
-            <TextBox x:Name="textBoxPassword" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
+            <TextBox x:Name="textBoxPassword" FontSize="22" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
             <Label Content="Почта" FontSize="22" Margin="5" FontFamily="{StaticResource fontFamily}"></Label>
-            <TextBox x:Name="textBoxMail" Height="22" Margin="5"></TextBox>
+            <TextBox x:Name="textBoxMail" FontSize="22" Height="25" Margin="5" FontFamily="{StaticResource fontFamily}"></TextBox>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition></RowDefinition>

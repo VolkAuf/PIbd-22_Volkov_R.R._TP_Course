@@ -7,7 +7,7 @@
         <SolidColorBrush x:Key="foregroundBrush" Color="White"></SolidColorBrush>
         <SolidColorBrush x:Key="backgroundBrush" Color="#FF005F90"/>
 
-        <FontFamily x:Key="fontFamily">Times New Roman</FontFamily>
+        <FontFamily x:Key="fontFamily">images/Roboto-Regular.ttf</FontFamily>
 
         <Style x:Key="button" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource backgroundBrush}"></Setter>

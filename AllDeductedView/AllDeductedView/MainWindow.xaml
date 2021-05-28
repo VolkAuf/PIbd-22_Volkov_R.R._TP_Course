@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AllDeductedView"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="1000">
 
     <Window.Resources>
         <Style TargetType="DockPanel" x:Key="MainMenu">
@@ -14,11 +14,12 @@
     </Window.Resources>
     
     <DockPanel LastChildFill="True" Style="{StaticResource MainMenu}">
-        <Grid DockPanel.Dock="Top">
+        <Grid DockPanel.Dock="Top" Height="53">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -45,7 +46,8 @@
                 </Button.Content>
             </Button>
             <Button Grid.Column="5" Margin="5" Content="Отчет" Style="{StaticResource button}" Click="ButtonReport_Click"/>
-            <Button Grid.Column="6" Margin="5" Content="Выход" Style="{StaticResource button}" Click="ButtonExit_Click"/>
+            <Button Grid.Column="6" Margin="5" Content="Диаграмма" Style="{StaticResource button}" Click="ButtonDiag_Click"/>
+            <Button Grid.Column="7" Margin="5" Content="Выход" Style="{StaticResource button}" Click="ButtonExit_Click"/>
         </Grid>
         <Canvas HorizontalAlignment="Center" Width="650" Height="300" VerticalAlignment="Center">
             <Image  x:Name="logoDark" Source="C:\Users\Rafael\source\repos\PIbd-22_Volkov_R.R._TP_Course\AllDeductedView\AllDeductedView\Images\logotip.jpg" Height="300" Width="650" />

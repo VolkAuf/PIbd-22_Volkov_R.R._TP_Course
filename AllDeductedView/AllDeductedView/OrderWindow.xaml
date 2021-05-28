@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AllDeductedView"
         mc:Ignorable="d"
+        xmlns:ViewModels="clr-namespace:AllDeductedBusinessLogic.ViewModels;assembly=AllDeductedBusinessLogic" 
         Loaded="OrdersWindow_Loaded"
         Title="OrderWindow" Height="250" Width="600">
     <Grid>

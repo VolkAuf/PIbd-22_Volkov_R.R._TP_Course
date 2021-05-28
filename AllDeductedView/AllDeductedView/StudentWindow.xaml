@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AllDeductedView"
+        xmlns:ViewModels="clr-namespace:AllDeductedBusinessLogic.ViewModels;assembly=AllDeductedBusinessLogic" 
         mc:Ignorable="d"
         Loaded="StudentWindow_Load"
         Title="StudentWindow" Width="400" Height="250" Topmost="True">

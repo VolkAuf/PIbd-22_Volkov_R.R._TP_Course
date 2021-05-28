@@ -34,7 +34,7 @@ namespace AllDeductedDatabaseImplement.Implements
                         Statuses = rec.Students.Select(rec => new StudyingStatusViewModel
                         {
                             Id = rec.StudyingStatus.Id,
-                            DateCreate = rec.StudyingStatus.DateCreate,
+                            DateCreate = rec.StudyingStatus.EnrollmentDate,
                             Course = rec.StudyingStatus.Course,
                             StudyingForm= rec.StudyingStatus.StudyingForm,
                             StudyingBase= rec.StudyingStatus.StudyingBase,
@@ -67,7 +67,7 @@ namespace AllDeductedDatabaseImplement.Implements
                         Statuses = rec.Students.Select(rec => new StudyingStatusViewModel
                         {
                             Id = rec.StudyingStatus.Id,
-                            DateCreate = rec.StudyingStatus.DateCreate,
+                            DateCreate = rec.StudyingStatus.EnrollmentDate,
                             Course = rec.StudyingStatus.Course,
                             StudyingForm = rec.StudyingStatus.StudyingForm,
                             StudyingBase = rec.StudyingStatus.StudyingBase,

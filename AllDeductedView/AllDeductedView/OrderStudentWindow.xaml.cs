@@ -1,4 +1,5 @@
-﻿using AllDeductedBusinessLogic.BusinessLogics;
+﻿using AllDeductedBusinessLogic.BindingModels;
+using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,10 @@ namespace AllDeductedView
         public OrderStudentWindow(StudentLogic logic)
         {
             InitializeComponent();
-            List<StudentViewModel> list = logic.Read(null);
+            List<StudentViewModel> list = logic.Read(new StudentBindingModel
+            {
+                ProviderId = App.SelectProvider.Id
+            });
             if (list != null)
             {
                 comboBoxStudent.DisplayMemberPath = "LastName";

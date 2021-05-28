@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AllDeductedDatabaseImplement.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210403162628_InitCreate")]
-    partial class InitCreate
+    [Migration("20210521072913_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -237,6 +237,10 @@ namespace AllDeductedDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("course");
 
+                    b.Property<DateTime>("EnrollmentDate")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("enrollment_date");
+
                     b.Property<int>("ProviderId")
                         .HasColumnType("integer")
                         .HasColumnName("provider_id");
@@ -245,12 +249,14 @@ namespace AllDeductedDatabaseImplement.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("student_id");
 
-                    b.Property<int>("StudyingBase")
-                        .HasColumnType("integer")
+                    b.Property<string>("StudyingBase")
+                        .IsRequired()
+                        .HasColumnType("varchar(24)")
                         .HasColumnName("studying_base");
 
-                    b.Property<int>("StudyingForm")
-                        .HasColumnType("integer")
+                    b.Property<string>("StudyingForm")
+                        .IsRequired()
+                        .HasColumnType("varchar(24)")
                         .HasColumnName("studying_form");
 
                     b.HasKey("Id");

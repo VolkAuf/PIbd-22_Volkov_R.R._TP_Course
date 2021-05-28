@@ -1,6 +1,7 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Windows;
@@ -20,18 +21,23 @@ namespace AllDeductedView
         private OrderViewModel oView;
         private Dictionary<int, string> linkGroup;
         private Dictionary<int, string> Students;
-        
+        private readonly Logger logger;
+
         public OrderGroupWindow(GroupLogic logicG, OrderLogic logicO)
         {
             InitializeComponent();
             this.logic = logicO;
             this.logicG = logicG;
+            logger = LogManager.GetCurrentClassLogger();
         }
         private void OrderGroupWindow_Load(object sender, RoutedEventArgs e)
         {
             try
             {
-                var list = logic.Read(null);
+                var list = logic.Read( new OrderBindingModel
+                {
+                    ProviderId = App.SelectProvider.Id
+                });
                 comboBoxOrderGroup.ItemsSource = list;
                 comboBoxOrderGroup.SelectedItem = null;
                 var listG = logicG.Read(null);
@@ -39,6 +45,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка загрузки данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -75,6 +82,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка чтения данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -112,6 +120,7 @@ namespace AllDeductedView
                         }
                         catch (Exception ex)
                         {
+                            logger.Error("Ошибка удаления данных : " + ex.Message);
                             MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
@@ -146,6 +155,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка сохранения данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

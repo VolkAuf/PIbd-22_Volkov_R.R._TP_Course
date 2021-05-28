@@ -2,6 +2,7 @@
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
 using AllDeductedDatabaseImplement.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,7 +35,8 @@ namespace AllDeductedView
         private readonly OrderLogic logic;
         private readonly StudentLogic logicS;
         private Dictionary<int,string>  orderStudents;
-        
+        private readonly Logger logger;
+
         public int Id
         {
             set { id = value; }
@@ -47,6 +49,7 @@ namespace AllDeductedView
             InitializeComponent();
             this.logic = logic;
             this.logicS = logicS;
+            logger = LogManager.GetCurrentClassLogger();
         }
 
         private void OrdersWindow_Loaded(object sender, RoutedEventArgs e)
@@ -55,7 +58,10 @@ namespace AllDeductedView
             {
                 try
                 {
-                    OrderViewModel view = logic.Read(new OrderBindingModel { Id = id.Value })?[0];
+                    OrderViewModel view = logic.Read(new OrderBindingModel { 
+                        Id = id.Value,
+                        ProviderId = App.SelectProvider.Id
+                    })?[0];
                     if (view != null)
                     {
                         orderStudents = view.Students;
@@ -64,6 +70,7 @@ namespace AllDeductedView
                 }
                 catch (Exception ex)
                 {
+                    logger.Error("Ошибка загрузки данных : " + ex.Message);
                     MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
@@ -88,10 +95,10 @@ namespace AllDeductedView
                         });
                     }
                 }
-                
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка заполнения данными : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -111,8 +118,6 @@ namespace AllDeductedView
                 }
                 LoadData();
             }
-
-            
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
@@ -136,6 +141,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка сохранения данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
@@ -159,6 +165,7 @@ namespace AllDeductedView
                     }
                     catch (Exception ex)
                     {
+                        logger.Error("Ошибка удаления данных : " + ex.Message);
                         MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     LoadData();

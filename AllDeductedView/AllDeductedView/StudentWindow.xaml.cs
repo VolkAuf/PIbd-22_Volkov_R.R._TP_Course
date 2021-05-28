@@ -1,6 +1,7 @@
 ﻿using AllDeductedBusinessLogic.BindingModels;
 using AllDeductedBusinessLogic.BusinessLogics;
 using AllDeductedBusinessLogic.ViewModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,10 +33,11 @@ namespace AllDeductedView
         private int? id;
 
         private readonly StudentLogic logicS;
+        private readonly Logger logger;
         public StudentWindow(StudentLogic logicS)
         {
             InitializeComponent();
-            
+            logger = LogManager.GetCurrentClassLogger();
             this.logicS = logicS;
         }
         private void StudentWindow_Load(object sender, RoutedEventArgs e)
@@ -44,7 +46,8 @@ namespace AllDeductedView
             {
                 StudentViewModel student = logicS.Read(new StudentBindingModel
                 {
-                    Id = id
+                    Id = id,
+                    ProviderId = App.SelectProvider.Id
                 })?[0];
 
                 textBoxFirstName.Text = student.FirstName;
@@ -52,7 +55,6 @@ namespace AllDeductedView
                 textBoxPatronymic.Text = student.Patronymic;
             }
         }
-
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e)
         {
@@ -87,6 +89,7 @@ namespace AllDeductedView
             }
             catch (Exception ex)
             {
+                logger.Error("Ошибка созранения данных : " + ex.Message);
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
